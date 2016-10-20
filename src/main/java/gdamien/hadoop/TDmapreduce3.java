@@ -4,6 +4,9 @@ package gdamien.hadoop;
  * Created by Gauthier on 08/10/2016.
  */
 
+/* ATTENTION : CE CODE FONCTIONNE MAIS NE RENVOIE PAS LE BON RESULTAT MAIS m 1.0 ET f 1.0 DONC JE SUPPOSE QU'IL RENVOIE NB(m)/NB(m) AU LIEU DE NB(m)/NB(Total) PAR EXEMPLE. 
+EN REVANCHE LE FICHIER td-3.txt sur le serveur contient le bon résultat qui lui a été trouvé grâce à Hive */
+
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
