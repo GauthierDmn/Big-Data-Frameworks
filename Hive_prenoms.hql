@@ -1,0 +1,26 @@
+/* Question 1 : Select the number of names by origin */
+
+SELECT count(*), org FROM prenoms3 LATERAL VIEW explode(origin) adTable AS org GROUP BY org;
+
+/* Question 2 : Select the number of names by number of origin */
+
+SELECT size(origin), count(origin) FROM prenoms3 GROUP BY size(origin);
+
+/* Question 3 : Select the % of male names and % of female names */
+/* Here I wrote two queries to facilitate the job but it is possible to do it in a single query */
+/* The two requests are not so "pretty" because I did not manage to use a "select count(gender[0])/(select * from prenoms3) AS fract ..."
+in my select request part. Hive may not support it? */
+
+SELECT table1.count/table2.count
+FROM (SELECT
+count(gender[0]) as count, 1 as id FROM prenoms3 WHERE gender[0]=="m" OR gender[1]=="m") table1
+LEFT JOIN ( SELECT
+count(gender[0]) as count, 1 as id FROM prenoms3) table2
+ON table1.id = table2.id;
+
+SELECT table1.count/table2.count
+FROM (SELECT
+count(gender[0]) as count, 1 as id FROM prenoms3 WHERE gender[0]=="f" OR gender[1]=="f") table1
+LEFT JOIN ( SELECT
+count(gender[0]) as count, 1 as id FROM prenoms3) table2
+ON table1.id = table2.id;
